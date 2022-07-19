@@ -17,7 +17,7 @@ public class Data {
     public synchronized void pollTheInt() throws InterruptedException {
         wait();
 
-        //if (ourDeque.size()<SIZE)notifyAll();
+
 while (!ourDeque.isEmpty()) {
     boolean random = new Random().nextBoolean();//Чтобы потоки не пытались вычитать то,чего нет, и не использовать Concurrent коллекции, будем
     Integer i;                                //рандомно брать элементы из начала и из конца(в принципе можно заморочится на разбивание списка, на подсписки, но в условии этого не было)
