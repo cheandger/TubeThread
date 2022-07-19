@@ -1,13 +1,9 @@
-import java.util.LinkedList;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class SecondReader extends Thread {
-    private final LinkedList<Integer> ourDeque;
-    private final Integer SIZE;
+    private final Data data;
 
-    public SecondReader(LinkedList<Integer> ourDeque, Integer size) {
-        this.ourDeque = ourDeque;
-        this.SIZE = size;
+    public SecondReader(Data data) {
+      this.data=data;
     }
 
     @Override
@@ -15,26 +11,17 @@ public class SecondReader extends Thread {
 
         while (true) {
             try {
-                pollTheInt();
 
+               data.pollTheInt();
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
         }
     }
-    public synchronized void pollTheInt() throws InterruptedException {
-
-        wait();
-
-        Integer i = ourDeque.poll();
-        System.out.println(this.getId() + " Reading by 1stReaderThread: " + i);
-        notifyAll();
-        while (ourDeque.isEmpty())
-            wait();
-    }
+}
 
 
-    }
+
 
 
 

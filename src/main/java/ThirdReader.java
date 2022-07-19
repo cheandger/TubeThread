@@ -1,30 +1,40 @@
-import java.util.LinkedList;
-import java.util.concurrent.ConcurrentLinkedQueue;
+
 
 public class ThirdReader extends Thread {
+    private final Data data;
 
-    private final LinkedList<Integer> ourDeque;
-    private final Integer SIZE;
-
-    public ThirdReader(LinkedList<Integer> ourDeque, Integer size) {
-        this.ourDeque = ourDeque;
-        this.SIZE = size;
+    public ThirdReader(Data data) {
+        this.data=data;
     }
+
 
     @Override
-    public void run() {
+        public void run() {
 
-        while (true) {
-            try {
-                pollTheInt();
+            while (true) {
+                try {
 
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                    data.pollTheInt();
+
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
+
+
     }
 
-    public synchronized void pollTheInt() throws InterruptedException {
+
+
+
+
+
+
+
+
+
+/*   public synchronized void pollTheInt() throws InterruptedException {
 
         if (ourDeque.size()==SIZE){
             notify();
@@ -33,14 +43,7 @@ public class ThirdReader extends Thread {
         }notifyAll();
     }
 
-}
-
-
-
-
-
-
-
+}*/
 
 
 

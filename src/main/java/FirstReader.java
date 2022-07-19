@@ -1,17 +1,11 @@
-import java.util.LinkedList;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.Semaphore;
+
 
 public class FirstReader extends Thread {
-    private final LinkedList<Integer> ourDeque;
-    private final Integer SIZE;
+  private final Data data;
 
-    public FirstReader(LinkedList<Integer> ourDeque, Integer size) {
+    public FirstReader(Data data) {
 
-        this.ourDeque = ourDeque;
-        this.SIZE = size;
+        this.data = data;
     }
 
     @Override
@@ -19,7 +13,8 @@ public class FirstReader extends Thread {
 
         while (true) {
             try {
-                pollTheInt();
+
+                 data.pollTheInt();
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
@@ -27,17 +22,9 @@ public class FirstReader extends Thread {
         }
     }
 
-    public synchronized void pollTheInt() throws InterruptedException {
-
-if (ourDeque.size()<SIZE)
-{wait();}else {notify();}
-        Integer i = ourDeque.poll();
-        System.out.println(this.getId() + " Reading by 1stReaderThread: " + i);
-        notifyAll();
-        while (ourDeque.isEmpty())wait();
 
 
-    }
+
 
 }
 

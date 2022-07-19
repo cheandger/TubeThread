@@ -1,44 +1,27 @@
-import java.util.LinkedList;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 public class Writer extends Thread {
 
-    private final  LinkedList<Integer> ourDeque;
-    private final Integer SIZE;
+  private final Data data;
 
-    public Writer(LinkedList<Integer> ourDeque, Integer size) {
+    public Writer(Data data) {
 
-        this.ourDeque = ourDeque;
-        this.SIZE = size;
+       this.data = data;
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                writeInt();
+
+                System.out.println(Thread.currentThread().getName() + " WriterThread put the " + data.writeInt()+ " Integer in the List");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public synchronized void writeInt() throws InterruptedException {
-
-
-
-        Integer  someInt = new java.util.Random().nextInt(500);
-        ourDeque.add(someInt);
-        System.out.println(this.getId() + "WriterThread:" + someInt);
-
-
-        }
-    }
-
+}
 
 
 
